@@ -281,7 +281,7 @@ class Slicer(object):
                         self._ignore_tiles.remove(img_id_str)
                         continue
                 new_im.save(
-                    '{}{}{}.{}'.format(self.IMG_DST, os.sep,file_name + img_id_str, file_type),dpi=new_im.info["dpi"],quality=95,subsampling=0)
+                    '{}{}{}.{}'.format(self.IMG_DST, os.sep,file_name +"_"+ img_id_str, file_type),dpi=new_im.info["dpi"],quality=95,subsampling=0)
                 new_ids.append(img_id_str)
                 img_no += 1
             mapper[file_name] = new_ids
@@ -342,6 +342,7 @@ class Slicer(object):
             im_w, im_h = int(root.find('size')[0].text), int(
                 root.find('size')[1].text)
             im_filename = os.path.splitext(root.find('filename').text)[0]
+            ic("annotation file name", im_filename)
             extn = os.path.splitext(root.find('filename').text)[1]
             if number_tiles > 0:
                 n_cols, n_rows = calc_columns_rows(number_tiles)
@@ -411,7 +412,7 @@ class Slicer(object):
                     self._ignore_tiles.append(img_no_str)
                 else:
                     voc_writer.save(
-                        '{}{}{}.xml'.format(self.ANN_DST, os.sep, img_no_str))
+                        '{}{}{}.xml'.format(self.ANN_DST, os.sep, im_filename+"_"+img_no_str))
                     tile_ids.append(img_no_str)
                     img_no += 1
                 empty_count = 0
