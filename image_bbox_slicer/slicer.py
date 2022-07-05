@@ -8,7 +8,7 @@ import random
 from PIL import Image
 from pascal_voc_writer import Writer
 from .helpers import *
-
+from icecream import ic
 
 class Slicer(object):
     """
@@ -258,6 +258,7 @@ class Slicer(object):
 
         for file in sorted(glob.glob(self.IMG_SRC + os.sep + "*")):
             file_name = file.split(os.sep)[-1].split('.')[0]
+            ic(file_name)
             file_type = file.split(os.sep)[-1].split('.')[-1].lower()
             if file_type.lower() not in IMG_FORMAT_LIST:
                 continue
@@ -280,7 +281,7 @@ class Slicer(object):
                         self._ignore_tiles.remove(img_id_str)
                         continue
                 new_im.save(
-                    '{}{}{}.{}'.format(self.IMG_DST, os.sep, img_id_str, file_type),dpi=new_im.info["dpi"],quality=95,subsampling=0)
+                    '{}{}{}.{}'.format(self.IMG_DST, os.sep,file_name + img_id_str, file_type),dpi=new_im.info["dpi"],quality=95,subsampling=0)
                 new_ids.append(img_id_str)
                 img_no += 1
             mapper[file_name] = new_ids
