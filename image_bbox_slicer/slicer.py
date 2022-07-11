@@ -281,7 +281,7 @@ class Slicer(object):
                         self._ignore_tiles.remove(img_id_str)
                         continue
                 new_im.save(
-                    '{}{}{}.{}'.format(self.IMG_DST, os.sep,file_name +"_"+ img_id_str, file_type),dpi=new_im.info["dpi"],quality=95,subsampling=0)
+                    '{}{}{}.{}'.format(self.IMG_DST, os.sep,file_name +"_"+ img_id_str, file_type),quality=95,subsampling=0)
                 new_ids.append(img_id_str)
                 img_no += 1
             mapper[file_name] = new_ids
